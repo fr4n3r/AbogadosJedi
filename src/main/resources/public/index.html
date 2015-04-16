@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Time Tracker Jedi</title>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	</head>
+
+	<body ng-app>
+		<form class="form-horizontal" ng-controller="controlador"  ng-init="initFirst()">
+			<div class="jumbotron text-center">
+            	<h1>Tareas Jedi:</h1>
+        	</div>
+			<div class="form-group input-lg">
+	    		<label class="col-sm-2 control-label">Empleado</label>
+			    <div class="col-sm-10">
+		      		<input type="text" class="form-control" id="inputEmpleado" placeholder="Windu" ng-model="formData.usuario">
+			    </div>
+			</div>
+			<div class="form-group input-lg">
+				<label class="col-sm-2 control-label">Tipo</label>
+				<div class="col-sm-10">
+					<select class="form-control input-sm" ng-model="tipo" 
+									ng-change="updTarifa()" 
+									ng-options="jedi as jedi.tipo for jedi in tiposJedi">
+					</select>
+				</div>
+			</div>
+			<div class="form-group input-lg">
+	    		<label class="col-sm-2 control-label">Tarifa</label>
+			    <div class="col-sm-10">
+		      		<input type="text" class="form-control" id="inputTarifa" placeholder="50" ng-model="formData.tarifa" >
+			    </div>
+			</div>
+			<div class="form-group input-lg">
+	    		<label class="col-sm-2 control-label">Cliente</label>
+			    <div class="col-sm-10">
+		      		<input type="text" class="form-control" id="inputCliente" placeholder="Senado Galactico" ng-model="formData.cliente">
+			    </div>
+			</div>
+			<div class="form-group input-lg">
+	    		<label class="col-sm-2 control-label">Tarea</label>
+			    <div class="col-sm-10">
+		      		<input type="text" class="form-control" id="inputTarea" placeholder="Informe" ng-model="formData.tarea">
+			    </div>
+			</div>
+			<div class="form-group input-lg">
+	    		<label class="col-sm-2 control-label">Horas Incurridas</label>
+			    <div class="col-sm-10">
+		      		<input type="text" class="form-control" id="inputHoras" placeholder="1" ng-model="formData.horas">
+			    </div>
+			</div>
+			<div class="form-group input-lg text-center">
+				<button id="guardar" type="submit" class="btn btn-primary btn-lg" ng-click="guardarTarea()" ng-disabled="timerRunning">Submit</button>
+			</div>
+			<div class="jumbotron">
+	  			<div class="col-xs-6">
+		  			<div class="form-group input-lg">
+			    		<label class="col-sm-4 control-label">Informe Cliente:</label>
+					    <div class="col-sm-3">
+				      		<input type="text" class="form-control" id="inputClientes" placeholder="Cliente..." ng-model="query.cliente">
+					    </div>
+					    <div class="col-sm-3">
+					    	<label class="control-label">
+					    		Importe Total: {{precioPorEmpresa(informePrecio)}}
+					    	</label>
+					    </div>
+					</div>
+				  	<table class="table table-bordered">
+				    	<tr>
+					    	<th>Cliente</th>
+					    	<th>Usuario</th>
+						    <th>Tipo</th>
+						    <th>Tarifa</th>
+						    <th>Horas</th>
+					  	</tr>
+				    	<tr ng-repeat="dato in informePrecio = (datosInforme | filter:query)">
+				    		<td data-title="'Cliente'">{{ dato.cliente }}</td>
+					    	<td data-title="'Usuario'">{{ dato.usuario }}</td>
+					  		<td data-title="'Tipo'">{{ dato.tipo }}</td>
+					  		<td data-title="'Tarifa'">{{ dato.tarifa }}</td>
+					  		<td data-title="'Horas'">{{ dato.horas }}</td>
+				   		</tr>
+			 		</table>	
+		  		</div>
+	  			<div class="col-xs-6">
+			  		<div class="form-group input-lg">
+			    		<label class="col-sm-4 control-label">Informe Tareas:</label>
+					    <div class="col-sm-3">
+				      		<input type="text" class="form-control" id="inputTareas" placeholder="Tarea..." ng-model="query2.tarea">
+					    </div>
+					    <div class="col-sm-3">
+					    	<label class="control-label">
+					    		Horas Totales: {{horasTotales(informeTareas)}}
+					    	</label>
+					    </div>
+					</div>
+				  	<table class="table table-bordered">
+				    	<tr>
+					    	<th>Cliente</th>
+					    	<th>Usuario</th>
+						    <th>Tarea</th>
+						    <th>Horas</th>
+					  	</tr>
+				    	<tr ng-repeat="dato in informeTareas = (datosInforme | filter:query2)">
+				    		<td data-title="'Cliente'">{{ dato.cliente }}</td>
+					    	<td data-title="'Usuario'">{{ dato.usuario }}</td>
+					  		<td data-title="'Tarea'">{{ dato.tarea }}</td>
+					  		<td data-title="'Horas'">{{ dato.horas }}</td>
+				   		</tr>
+			 		</table>
+			  
+			  </div>
+			</div>
+		</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    	<script src="js/controlador.js"></script>
+	</body>
+</html>
