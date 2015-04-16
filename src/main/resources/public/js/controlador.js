@@ -1,4 +1,3 @@
-
 function controlador($scope, $http) {
     $scope.formData= {};
 	$scope.tiposJedi = [{tipo:'Padawan', tarifa:25},{tipo:'Jedi', tarifa:33},{tipo:'Maestro Jedi', tarifa:45}];
@@ -26,7 +25,7 @@ function controlador($scope, $http) {
     		})
     		.error(function(data){
     			console.log(data);
-    			alert('Existe un error en los datos del formulario');
+    			alert('Existe un error en los datos de envio del formulario');
     		});
     }   
 
